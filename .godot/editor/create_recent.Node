@@ -1,0 +1,15 @@
+AnimationPlayer
+CenterContainer
+GridContainer
+Label
+Panel
+ColorRect
+CanvasLayer
+Node
+CollisionShape2D
+StaticBody2D
+Node2D
+RemoteTransform2D
+Camera2D
+Sprite2D
+TileMap

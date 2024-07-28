@@ -1,0 +1,90 @@
+[gd_scene load_steps=15 format=3 uid="uid://d1m3gkw77ht0d"]
+
+[ext_resource type="Script" path="res://enemies/enemy.gd" id="1_31bva"]
+[ext_resource type="PackedScene" uid="uid://b7vp7qqfoxl0p" path="res://misc/skull.tscn" id="2_sl3cq"]
+[ext_resource type="Texture2D" uid="uid://bygbxui2q3mcn" path="res://addons/Tiny Swords/Factions/Goblins/Troops/Torch/Blue/Torch_Blue.png" id="3_bn56t"]
+[ext_resource type="PackedScene" uid="uid://y6yuqpmg0jlp" path="res://misc/meat.tscn" id="3_nmc3y"]
+[ext_resource type="PackedScene" uid="uid://c0f7njv2883td" path="res://misc/golden_meat.tscn" id="4_2sevp"]
+[ext_resource type="Script" path="res://enemies/behaviors/follow_player.gd" id="4_qo4t2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ybokj"]
+atlas = ExtResource("3_bn56t")
+region = Rect2(0, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8x72e"]
+atlas = ExtResource("3_bn56t")
+region = Rect2(192, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i62cd"]
+atlas = ExtResource("3_bn56t")
+region = Rect2(384, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cxgsg"]
+atlas = ExtResource("3_bn56t")
+region = Rect2(576, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h2tdy"]
+atlas = ExtResource("3_bn56t")
+region = Rect2(768, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5okma"]
+atlas = ExtResource("3_bn56t")
+region = Rect2(960, 192, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yt6x1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ybokj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8x72e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i62cd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cxgsg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h2tdy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5okma")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8y6ym"]
+radius = 7.62296
+height = 41.7531
+
+[node name="Goblin" type="CharacterBody2D" groups=["enemies"]]
+scale = Vector2(2.29923, 2.29923)
+motion_mode = 1
+script = ExtResource("1_31bva")
+health = 20
+death_prefab = ExtResource("2_sl3cq")
+drop_chance = 0.2
+drop_items = Array[PackedScene]([ExtResource("3_nmc3y"), ExtResource("4_2sevp")])
+drop_chances = Array[float]([0.8, 0.2])
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -30)
+sprite_frames = SubResource("SpriteFrames_yt6x1")
+autoplay = "default"
+frame_progress = 0.775141
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5.85981)
+rotation = -1.57079
+shape = SubResource("CapsuleShape2D_8y6ym")
+
+[node name="FollowPlayer" type="Node" parent="."]
+script = ExtResource("4_qo4t2")
+speed = 0.4
+
+[node name="DamageDigitMarker" type="Marker2D" parent="."]
+position = Vector2(0, -72.1981)
